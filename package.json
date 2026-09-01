@@ -1,0 +1,26 @@
+{
+  "name": "numberpredictionai",
+  "version": "1.0.0",
+  "description": "JavaScript neural-network number prediction demo using TensorFlow.js",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "node --test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://localhost:26831/rapric2115/NumberPredictionAI"
+  },
+  "keywords": [
+    "javascript",
+    "ai",
+    "machine-learning",
+    "neural-network",
+    "tensorflow"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@tensorflow/tfjs": "^4.22.0"
+  }
+}
