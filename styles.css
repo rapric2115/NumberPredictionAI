@@ -1,0 +1,382 @@
+:root {
+    /* =========================================================
+       STITCH COLOR SYSTEM
+    ========================================================== */
+
+    --inverse-surface: #2d3133;
+    --surface-variant: #e0e3e5;
+
+    --on-tertiary-fixed: #2f1500;
+    --on-secondary: #ffffff;
+
+    --primary: #000000;
+    --on-surface-variant: #45464d;
+
+    --on-tertiary: #ffffff;
+    --tertiary-fixed: #ffdcc3;
+
+    --surface-tint: #565e74;
+
+    --on-primary-fixed-variant: #3f465c;
+    --inverse-on-surface: #eff1f3;
+
+    --surface-container-low: #f2f4f6;
+
+    --on-tertiary-fixed-variant: #6e3900;
+    --on-primary-fixed: #131b2e;
+
+    --error: #ba1a1a;
+
+    --primary-fixed: #dae2fd;
+    --surface-dim: #d8dadc;
+
+    --surface-container: #eceef0;
+
+    --on-error-container: #93000a;
+
+    --on-secondary-container: #006f66;
+
+    --on-primary: #ffffff;
+
+    --on-secondary-fixed: #00201d;
+
+    --secondary: #006a61;
+
+    --surface-container-highest: #e0e3e5;
+    --surface-container-high: #e6e8ea;
+
+    --on-error: #ffffff;
+
+    --surface-container-lowest: #ffffff;
+
+    --error-container: #ffdad6;
+
+    --tertiary-container: #2f1500;
+
+    --on-secondary-fixed-variant: #005049;
+
+    --background: #f7f9fb;
+    --surface-bright: #f7f9fb;
+    --surface: #f7f9fb;
+
+    --secondary-fixed-dim: #6bd8cb;
+    --secondary-fixed: #89f5e7;
+
+    --primary-container: #131b2e;
+
+    --on-tertiary-container: #c76c00;
+
+    --primary-fixed-dim: #bec6e0;
+
+    --outline-variant: #c6c6cd;
+    --outline: #76777d;
+
+    --tertiary: #000000;
+
+    --on-primary-container: #7c839b;
+
+    --on-surface: #191c1e;
+
+    --secondary-container: #86f2e4;
+
+    --on-background: #191c1e;
+
+    --inverse-primary: #bec6e0;
+
+    --tertiary-fixed-dim: #ffb77d;
+
+
+    /* =========================================================
+       SPACING
+    ========================================================== */
+
+    --base: 8px;
+    --gutter: 24px;
+
+    --margin-desktop: 40px;
+    --margin-mobile: 16px;
+
+    --container-max: 1440px;
+}
+
+
+/* =============================================================
+   BASE
+============================================================= */
+
+html {
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--on-background);
+}
+
+
+/* =============================================================
+   STITCH GLASS CARD
+============================================================= */
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.7);
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border: 1px solid rgba(255, 255, 255, 0.5);
+
+    box-shadow:
+        0 4px 6px -1px rgba(15, 23, 42, 0.04),
+        0 2px 4px -1px rgba(15, 23, 42, 0.02);
+}
+
+
+/* =============================================================
+   AI GRADIENT
+============================================================= */
+
+.ai-gradient {
+    background: linear-gradient(
+        135deg,
+        #4f46e5 0%,
+        #9333ea 100%
+    );
+}
+
+
+/* =============================================================
+   TYPOGRAPHY
+============================================================= */
+
+.font-body-md {
+    font-family: "Inter", sans-serif;
+}
+
+.font-body-lg {
+    font-family: "Inter", sans-serif;
+}
+
+.font-body-sm {
+    font-family: "Inter", sans-serif;
+}
+
+.font-headline-sm {
+    font-family: "Inter", sans-serif;
+}
+
+.font-headline-md {
+    font-family: "Inter", sans-serif;
+}
+
+.font-headline-lg {
+    font-family: "Inter", sans-serif;
+}
+
+.font-data-mono {
+    font-family: "JetBrains Mono", monospace;
+}
+
+.font-label-caps {
+    font-family: "Inter", sans-serif;
+}
+
+
+/* =============================================================
+   STITCH FONT SIZES
+============================================================= */
+
+.text-body-md {
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 400;
+}
+
+.text-body-lg {
+    font-size: 18px;
+    line-height: 28px;
+    font-weight: 400;
+}
+
+.text-body-sm {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 400;
+}
+
+.text-data-mono {
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.text-headline-sm {
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 600;
+}
+
+.text-headline-md {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 600;
+}
+
+.text-headline-lg {
+    font-size: 32px;
+    line-height: 40px;
+    letter-spacing: -0.01em;
+    font-weight: 600;
+}
+
+.text-label-caps {
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+
+/* =============================================================
+   TAILWIND-COMPATIBLE DESIGN TOKENS
+============================================================= */
+
+.bg-background {
+    background-color: var(--background);
+}
+
+.bg-surface {
+    background-color: var(--surface);
+}
+
+.bg-inverse-surface {
+    background-color: var(--inverse-surface);
+}
+
+.bg-primary-container {
+    background-color: var(--primary-container);
+}
+
+.bg-secondary {
+    background-color: var(--secondary);
+}
+
+.bg-secondary-container {
+    background-color: var(--secondary-container);
+}
+
+.bg-surface-container-low {
+    background-color: var(--surface-container-low);
+}
+
+.bg-surface-container-highest {
+    background-color: var(--surface-container-highest);
+}
+
+.bg-surface-variant {
+    background-color: var(--surface-variant);
+}
+
+
+.text-on-background {
+    color: var(--on-background);
+}
+
+.text-on-surface {
+    color: var(--on-surface);
+}
+
+.text-on-surface-variant {
+    color: var(--on-surface-variant);
+}
+
+.text-on-primary {
+    color: var(--on-primary);
+}
+
+.text-on-secondary-container {
+    color: var(--on-secondary-container);
+}
+
+.text-surface-variant {
+    color: var(--surface-variant);
+}
+
+.text-secondary {
+    color: var(--secondary);
+}
+
+.text-primary {
+    color: var(--primary);
+}
+
+.text-error {
+    color: var(--error);
+}
+
+
+/* =============================================================
+   SPACING
+============================================================= */
+
+.p-margin-desktop {
+    padding: var(--margin-desktop);
+}
+
+.p-margin-mobile {
+    padding: var(--margin-mobile);
+}
+
+.px-margin-desktop {
+    padding-left: var(--margin-desktop);
+    padding-right: var(--margin-desktop);
+}
+
+.py-margin-desktop {
+    padding-top: var(--margin-desktop);
+    padding-bottom: var(--margin-desktop);
+}
+
+.gap-gutter {
+    gap: var(--gutter);
+}
+
+.gap-base {
+    gap: var(--base);
+}
+
+.max-w-container-max {
+    max-width: var(--container-max);
+}
+
+
+/* =============================================================
+   OUTLINES
+============================================================= */
+
+.border-outline-variant {
+    border-color: var(--outline-variant);
+}
+
+
+/* =============================================================
+   RESPONSIVE
+============================================================= */
+
+@media (max-width: 767px) {
+
+    .p-margin-desktop {
+        padding: var(--margin-mobile);
+    }
+
+    .px-margin-desktop {
+        padding-left: var(--margin-mobile);
+        padding-right: var(--margin-mobile);
+    }
+
+    .py-margin-desktop {
+        padding-top: var(--margin-mobile);
+        padding-bottom: var(--margin-mobile);
+    }
+
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charsest="utf-8"/>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+        <title>AI Prediction Dashboard</title>
+         <!-- Tailwinds CSS -->
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+        <!-- Load brain.js first -->
+        <script src="https://unpkg.com/brain.js"></script>
+        <script src="ai-engine.js"></script>
+        <script src="main.js" type="module"></script>
+        <!-- Material Symbols -->
+        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com" rel="preconnect"/>
+        <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+        
+        <link href="styles.css" rel="stylesheet" />
+
+        <!-- Drawer js -->
+        <script src="index.js"></script>
+    </head>
+ <body class="bg-background text-on-background font-body-md min-h-screen flex">
+    <!-- NavigationDrawer -->
+    <nav class="hidden md:flex h-full w-[280px] bg-inverse-surface shadow-xl fixed left-0 top-0 z-[60] flex-col">
+        <div class="p-margin-desktop">
+            <h1 class="font-headline-md text-headline-md font-bold text-on-primary">Lottery Insight</h1>
+        </div>
+        <ul class="flex flex-col gap-2 px-4 mt-4">
+            <li>
+                <a class="flex items-center gap-3 text-surface-variant px-4 py-3 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 rounded-lg" href="#">
+                    <span class="material-symbols-outlined" data-icon="home">home</span>
+                    <span class="font-body-md text-body-md">Home</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 text-surface-variant px-4 py-3 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 rounded-lg" href="#">
+                    <span class="material-symbols-outlined" data-icon="reorder">reorder</span>
+                    <span class="font-body-md text-body-md">Results</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 text-surface-variant px-4 py-3 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 rounded-lg" href="#">
+                    <span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+                    <span class="font-body-md text-body-md">Stats</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-lg px-4 py-3 transition-all duration-300" href="#">
+                    <span class="material-symbols-outlined" data-icon="psychology">psychology</span>
+                    <span class="font-body-md text-body-md font-bold">AI Predictions</span>
+                </a>
+            </li>
+            <li>
+                <a class="flex items-center gap-3 text-surface-variant px-4 py-3 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 rounded-lg" href="#">
+                    <span class="material-symbols-outlined" data-icon="payments">payments</span>
+                    <span class="font-body-md text-body-md">Pricing</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- Main Content Wrapper -->
+    <div class="flex-1 flex flex-col md:ml-[280px] min-h-screen">
+        <!-- TopAppBar -->
+        <header class="bg-surface dark:bg-inverse-surface shadow-sm sticky top-0 w-full z-50 flex justify-between items-center h-16 px-margin-desktop max-w-container-max mx-auto">
+            <div class="flex items-center gap-4">
+                <span class="material-symbols-outlined text-primary dark:text-inverse-primary md:hidden" data-icon="menu">menu</span>
+                <span class="material-symbols-outlined text-primary dark:text-inverse-primary" data-icon="analytics">analytics</span>
+                <span class="font-headline-lg text-headline-lg font-black text-primary dark:text-inverse-primary md:hidden">Lottery Insight</span>
+            </div>
+            <div>
+                <button class="text-on-surface-variant dark:text-surface-variant hover:text-secondary transition-colors duration-200 font-body-md text-body-md font-semibold">Account</button>
+            </div>
+        </header>
+        <!-- Dashboard Canvas -->
+        <main class="flex-1 p-margin-mobile md:p-margin-desktop max-w-container-max mx-auto w-full">
+            <div class="mb-8">
+                <h2 class="font-headline-lg text-headline-lg text-on-surface mb-2">AI Statistical Analysis - Mega Lotto</h2>
+                <p class="font-body-md text-body-md text-on-surface-variant">Configure parameters to generate high-probability combinatorial suggestions based on historical draws.</p>
+            </div>
+            <!-- Bento Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter mb-8">
+                <!-- Controls Sidebar -->
+                <div class="lg:col-span-4 flex flex-col gap-gutter">
+                    <div class="glass-card rounded-xl p-6">
+                        <div class="flex items-center gap-2 mb-4">
+                            <span class="material-symbols-outlined text-secondary">settings</span>
+                            <h3 class="font-label-caps text-label-caps uppercase text-on-surface-variant tracking-wider">Strategy Parameters</h3>
+                        </div>
+                        <div class="mb-6">
+                            <label class="block font-body-sm text-body-sm text-on-surface font-semibold mb-2">Algorithm Strategy</label>
+                            <div class="space-y-2">
+                                <label class="flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:border-secondary transition-colors">
+                                    <input checked="" class="text-secondary focus:ring-secondary" name="strategy" type="radio"/>
+                                    <span class="ml-3 font-body-sm text-body-sm text-on-surface">Balanced Distribution</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:border-secondary transition-colors">
+                                    <input class="text-secondary focus:ring-secondary" name="strategy" type="radio"/>
+                                    <span class="ml-3 font-body-sm text-body-sm text-on-surface">High Frequency (Hot)</span>
+                                </label>
+                                <label class="flex items-center p-3 border border-outline-variant rounded-lg cursor-pointer hover:border-secondary transition-colors">
+                                    <input class="text-secondary focus:ring-secondary" name="strategy" type="radio"/>
+                                    <span class="ml-3 font-body-sm text-body-sm text-on-surface">Overdue Deviation (Cold)</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="font-body-sm text-body-sm text-on-surface font-semibold">Combinations to Generate</label>
+                                <span class="font-data-mono text-data-mono text-secondary">5</span>
+                            </div>
+                            <input class="w-full h-2 bg-surface-variant rounded-lg appearance-none cursor-pointer accent-secondary" max="10" min="1" type="range" value="5"/>
+                        </div>
+                    </div>
+                </div>
+                <!-- Main Prediction Area -->
+                <div class="lg:col-span-8 flex flex-col gap-gutter">
+                    <div class="glass-card rounded-xl p-8 relative overflow-hidden bg-white">
+                        <div class="absolute top-0 right-0 p-4 opacity-10 pointer-events-none">
+                        <span class="material-symbols-outlined text-[120px]" data-icon="psychology">psychology</span>
+                        </div>
+                        <div class="flex justify-between items-start mb-8 relative z-10">
+                            <div>
+                                <div class="flex items-center gap-2 mb-2">
+                                    <span class="px-2 py-1 ai-gradient text-white rounded font-label-caps text-[10px] uppercase tracking-wider flex items-center gap-1">
+                                    <span class="material-symbols-outlined text-[12px]">auto_awesome</span> AI Generated
+                                    </span>
+                                </div>
+                                <h3 class="font-headline-md text-headline-md text-on-surface">Primary Suggestion</h3>
+                            </div>
+                            <div class="text-right">
+                                <div class="font-headline-lg text-headline-lg text-secondary" id="confidence_percentage">78%</div>
+                                <div class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">Confidence Score</div>
+                            </div>
+                        </div>
+                    <div class="flex flex-wrap gap-4 mb-8 relative z-10 justify-center">
+                        <div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-data-mono text-headline-md shadow-md border-2 border-white/10">07</div>
+                        <div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-data-mono text-headline-md shadow-md border-2 border-white/10">14</div>
+                        <div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-data-mono text-headline-md shadow-md border-2 border-white/10">23</div>
+                        <div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-data-mono text-headline-md shadow-md border-2 border-white/10">31</div>
+                        <div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-data-mono text-headline-md shadow-md border-2 border-white/10">38</div>
+                        <div class="w-16 h-16 rounded-full bg-primary-container text-white flex items-center justify-center font-data-mono text-headline-md shadow-md border-2 border-white/10">40</div>
+                        <div class="w-16 h-16 rounded-full bg-secondary text-white flex items-center justify-center font-data-mono text-headline-md shadow-md border-2 border-white/10 ring-4 ring-secondary/20">45</div>
+                    </div>
+                    <div class="bg-surface-container-low rounded-lg p-4 relative z-10 border border-outline-variant/30 flex items-start gap-3">
+                        <span class="material-symbols-outlined text-secondary mt-1">info</span>
+                        <p class="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">
+                            <strong>Analysis Summary:</strong> 3 hot numbers, 2 cold numbers, balanced odd/even distribution. The mega ball (45) aligns with historical seasonal clustering.
+                        </p>
+                    </div>
+                    </div>
+                    <!-- Actions -->
+                    <div class="flex gap-4 flex-wrap">
+                        <button class="ai-gradient text-white px-6 py-3 rounded-lg font-body-sm text-body-sm font-semibold hover:opacity-90 transition-opacity flex items-center gap-2 shadow-md">
+                            <span class="material-symbols-outlined" data-icon="refresh">refresh</span> Generate New
+                        </button>
+                        <button class="bg-primary-container text-white px-6 py-3 rounded-lg font-body-sm text-body-sm font-semibold hover:bg-opacity-90 transition-colors flex items-center gap-2 shadow-sm">
+                            <span class="material-symbols-outlined" data-icon="bookmark">bookmark</span> Save Prediction
+                        </button>
+                        <button class="bg-white border border-outline-variant text-on-surface px-6 py-3 rounded-lg font-body-sm text-body-sm font-semibold hover:border-secondary transition-colors flex items-center gap-2 shadow-sm">
+                            <span class="material-symbols-outlined" data-icon="history">history</span> View History
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- Disclaimer -->
+            <div class="mt-12 pt-6 border-t border-outline-variant flex gap-3 text-on-surface-variant max-w-3xl">
+                <span class="material-symbols-outlined text-error mt-0.5">warning</span>
+                <p class="font-body-sm text-body-sm text-xs">
+                    <strong>Disclaimer:</strong> Lottery Insight utilizes advanced statistical 
+                    modeling and historical data analysis to generate combinatorial suggestions. 
+                    These predictions are strictly for informational and analytical purposes and do not 
+                    guarantee a winning outcome. Lotteries are games of chance. Please play responsibly.
+                </p>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="bg-surface-container-highest dark:bg-inverse-surface border-t border-outline-variant w-full mt-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-base px-margin-desktop py-margin-desktop max-w-container-max mx-auto">
+        <div>
+        <span class="font-headline-sm text-headline-sm font-bold text-on-surface block mb-2">Lottery Insight</span>
+        <p class="font-body-sm text-body-sm text-primary dark:text-inverse-primary opacity-70">© 2024 Lottery Insight. Data-driven clarity for serious analysts.</p>
+        </div>
+        <div class="flex flex-wrap gap-4 md:justify-end items-end">
+        <a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary underline transition-colors" href="#">About</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary underline transition-colors" href="#">Contact</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary underline transition-colors" href="#">FAQ</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary underline transition-colors" href="#">TOS</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary underline transition-colors" href="#">Privacy</a>
+        <a class="font-body-sm text-body-sm text-on-surface-variant dark:text-surface-variant hover:text-primary dark:hover:text-inverse-primary underline transition-colors" href="#">Responsible Gambling</a>
+        </div>
+        </div>
+        </footer>
+    </div>
+</body>
+</html>

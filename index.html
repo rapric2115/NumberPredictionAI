@@ -1,23 +1,1316 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Brain.js Experiment</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <!-- Load brain.js first -->
-        <script src="https://unpkg.com/brain.js"></script>
-        <script src="ai-engine.js"></script>
-        <script src="main.js" type="module"></script>
-    </head>
-    <body>
-        <h1>Check your browser console to see the AI in action!</h1>
-        <section id="prediction" style="font-size: 1.2rem;"></section>
-        <section id="topFive" style="font-size: 1.4rem;"></section>
-        <!-- <section id="resultContainer"></section>
-        <section id="topResults"></section>
-        <section id="trainingContainer"></section>
-        <section id="newAi"></section>
-        <section id="AiContent"></section> -->
-        <!-- Load your app.js last -->
-        <script src="app.js"></script>
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Lottery Insight</title>
+
+    <!-- =========================================================
+         TAILWIND CSS CDN
+    ========================================================== -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- =========================================================
+         BRAIN.JS
+    ========================================================== -->
+    <script src="https://unpkg.com/brain.js"></script>
+
+    <!-- =========================================================
+         GOOGLE MATERIAL SYMBOLS
+    ========================================================== -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =========================================================
+         GOOGLE FONTS
+    ========================================================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500;600&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- =========================================================
+         APPLICATION STYLES
+    ========================================================== -->
+    <link
+        rel="stylesheet"
+        href="styles.css"
+    >
+
+    <!-- =========================================================
+         APPLICATION JAVASCRIPT
+    ========================================================== -->
+
+    <!-- AI engine must load before main.js -->
+    <script src="ai-engine.js"></script>
+
+    <!-- Main application -->
+    <script
+        src="main.js"
+        type="module"
+    ></script>
+
+    <!-- Drawer/navigation -->
+    <script src="index.js"></script>
+    <script src="js/user_info.js"></script>
+
+</head>
+
+
+<body
+    class="bg-background text-on-background font-body-md antialiased flex flex-col min-h-screen"
+>
+
+
+    <!-- =========================================================
+         TOP APP BAR
+    ========================================================== -->
+
+    <header
+        class="bg-surface shadow-sm fixed top-0 w-full z-50"
+    >
+
+        <div
+            class="flex
+                   justify-between
+                   items-center
+                   h-16
+                   px-margin-mobile
+                   md:px-margin-desktop
+                   max-w-container-max
+                   mx-auto
+                   w-full"
+        >
+
+            <!-- BRAND -->
+
+            <div class="flex items-center gap-base">
+
+                <span
+                    class="material-symbols-outlined
+                           text-primary
+                           text-2xl"
+                >
+                    analytics
+                </span>
+
+                <span
+                    class="font-headline-lg
+                           text-headline-lg
+                           font-black
+                           text-primary
+                           tracking-tight"
+                >
+                    Lottery Insight
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 DESKTOP NAVIGATION
+            ================================================== -->
+
+            <nav
+                class="hidden
+                       md:flex
+                       items-center
+                       gap-gutter"
+            >
+
+                <a
+                    href="#"
+                    class="text-secondary
+                           font-bold
+                           border-b-2
+                           border-secondary
+                           pb-1
+                           px-2
+                           font-body-md
+                           text-body-md
+                           transition-colors
+                           duration-200"
+                >
+                    Home
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-on-surface-variant
+                           font-body-md
+                           text-body-md
+                           px-2
+                           hover:text-secondary
+                           transition-colors
+                           duration-200"
+                >
+                    Results
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-on-surface-variant
+                           font-body-md
+                           text-body-md
+                           px-2
+                           hover:text-secondary
+                           transition-colors
+                           duration-200"
+                >
+                    Stats
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-on-surface-variant
+                           font-body-md
+                           text-body-md
+                           px-2
+                           hover:text-secondary
+                           transition-colors
+                           duration-200
+                           flex
+                           items-center
+                           gap-1"
+                >
+
+                    <span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings: 'FILL' 1;"
+                    >
+                        psychology
+                    </span>
+
+                    AI Predictions
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-on-surface-variant
+                           font-body-md
+                           text-body-md
+                           px-2
+                           hover:text-secondary
+                           transition-colors
+                           duration-200"
+                >
+                    Pricing
+                </a>
+
+            </nav>
+
+
+            <!-- ACCOUNT / MOBILE MENU -->
+
+            <div class="flex items-center">
+
+                <button
+                    class="hidden
+                           md:flex
+                           items-center
+                           gap-2
+                           px-4
+                           py-2
+                           text-primary
+                           font-body-md
+                           text-body-md
+                           hover:bg-surface-container
+                           rounded-lg
+                           transition-colors"
+                >
+
+                    Account
+
+                    <span class="material-symbols-outlined text-sm">
+                        person
+                    </span>
+
+                </button>
+
+
+                <button
+                    id="mobile-menu-btn"
+                    class="md:hidden
+                           p-2
+                           text-on-surface-variant"
+                >
+
+                    <span class="material-symbols-outlined">
+                        menu
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =========================================================
+         MOBILE NAVIGATION DRAWER
+    ========================================================== -->
+
+    <div
+        id="mobile-drawer"
+        class="fixed
+               inset-0
+               bg-primary/20
+               z-[60]
+               hidden
+               transition-opacity
+               duration-300"
+    >
+
+        <div
+            id="drawer-content"
+            class="bg-inverse-surface
+                   h-full
+                   w-[280px]
+                   fixed
+                   left-0
+                   top-0
+                   shadow-xl
+                   flex
+                   flex-col
+                   transform
+                   -translate-x-full
+                   transition-transform
+                   duration-300"
+        >
+
+            <!-- Drawer header -->
+
+            <div
+                class="p-margin-mobile
+                       flex
+                       justify-between
+                       items-center
+                       border-b
+                       border-surface-variant/20"
+            >
+
+                <span
+                    class="font-headline-md
+                           text-headline-md
+                           font-bold
+                           text-on-primary"
+                >
+                    Lottery Insight
+                </span>
+
+
+                <button
+                    id="close-drawer-btn"
+                    class="text-surface-variant
+                           hover:text-on-primary
+                           p-2"
+                >
+
+                    <span class="material-symbols-outlined">
+                        close
+                    </span>
+
+                </button>
+
+            </div>
+
+
+            <!-- Drawer links -->
+
+            <nav
+                class="flex-1
+                       px-4
+                       py-6
+                       flex
+                       flex-col
+                       gap-2"
+            >
+
+                <a
+                    href="#"
+                    class="bg-secondary-container
+                           text-on-secondary-container
+                           rounded-lg
+                           px-4
+                           py-3
+                           font-body-md
+                           text-body-md
+                           flex
+                           items-center
+                           gap-3"
+                >
+
+                    <span class="material-symbols-outlined">
+                        home
+                    </span>
+
+                    Home
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-surface-variant
+                           px-4
+                           py-3
+                           font-body-md
+                           text-body-md
+                           flex
+                           items-center
+                           gap-3
+                           rounded-lg
+                           hover:bg-primary-container
+                           hover:text-on-primary-container
+                           transition-all"
+                >
+
+                    <span class="material-symbols-outlined">
+                        reorder
+                    </span>
+
+                    Results
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-surface-variant
+                           px-4
+                           py-3
+                           font-body-md
+                           text-body-md
+                           flex
+                           items-center
+                           gap-3
+                           rounded-lg
+                           hover:bg-primary-container
+                           hover:text-on-primary-container
+                           transition-all"
+                >
+
+                    <span class="material-symbols-outlined">
+                        leaderboard
+                    </span>
+
+                    Stats
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-surface-variant
+                           px-4
+                           py-3
+                           font-body-md
+                           text-body-md
+                           flex
+                           items-center
+                           gap-3
+                           rounded-lg
+                           hover:bg-primary-container
+                           hover:text-on-primary-container
+                           transition-all"
+                >
+
+                    <span class="material-symbols-outlined">
+                        psychology
+                    </span>
+
+                    AI Predictions
+
+                </a>
+
+
+                <a
+                    href="#"
+                    class="text-surface-variant
+                           px-4
+                           py-3
+                           font-body-md
+                           text-body-md
+                           flex
+                           items-center
+                           gap-3
+                           rounded-lg
+                           hover:bg-primary-container
+                           hover:text-on-primary-container
+                           transition-all"
+                >
+
+                    <span class="material-symbols-outlined">
+                        payments
+                    </span>
+
+                    Pricing
+
+                </a>
+
+            </nav>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- =========================================================
+         MAIN CONTENT
+    ========================================================== -->
+
+    <main
+        class="flex-1
+               pt-16
+               mt-8
+               md:mt-16
+               px-margin-mobile
+               md:px-margin-desktop
+               max-w-container-max
+               mx-auto
+               w-full"
+    >
+
+
+        <!-- =====================================================
+             HERO SECTION
+        ====================================================== -->
+
+        <section
+            class="flex
+                   flex-col
+                   lg:flex-row
+                   gap-gutter
+                   lg:items-center
+                   py-12
+                   md:py-20"
+        >
+
+
+            <!-- =================================================
+                 HERO TEXT
+            ================================================== -->
+
+            <div
+                class="flex-1
+                       flex
+                       flex-col
+                       gap-6
+                       lg:pr-12"
+            >
+                <div class="items-center px-3 py-2 bg-surface-container-high
+                w-fit">
+                    <p>Welcome back </p>
+                    <h2 class="font-label-caps text-label-caps text-on-surface" id="userName">
+                        Hello User
+                    </h2>
+                </div>
+
+                <!-- Badge -->
+
+                <div
+                    class="inline-flex
+                           items-center
+                           gap-2
+                           px-3
+                           py-1
+                           bg-surface-container-high
+                           rounded-full
+                           w-fit"
+                >
+
+                    <span
+                        class="material-symbols-outlined
+                               text-secondary
+                               text-sm"
+                    >
+                        trending_up
+                    </span>
+
+                    <span
+                        class="font-label-caps
+                               text-label-caps
+                               text-on-surface
+                               uppercase
+                               tracking-widest"
+                    >
+                        Data-Driven Insights
+                    </span>
+
+                </div>
+
+
+                <!-- Heading -->
+
+                <h1
+                    class="font-display-lg
+                           text-display-lg
+                           text-primary
+                           max-w-2xl"
+                >
+
+                    Know the Numbers.
+                    <br>
+
+                    <span class="text-surface-tint">
+                        Understand the Data.
+                    </span>
+
+                </h1>
+
+
+                <!-- Description -->
+
+                <p
+                    class="font-body-lg
+                           text-body-lg
+                           text-on-surface-variant
+                           max-w-xl"
+                >
+
+                    Explore latest results, analyze historical trends,
+                    and unlock statistical AI predictions designed
+                    for serious analysts.
+
+                </p>
+
+
+                <!-- Hero buttons -->
+
+                <div
+                    class="flex
+                           flex-col
+                           sm:flex-row
+                           gap-4
+                           mt-4"
+                >
+
+                    <button
+                        class="bg-[#0F172A]
+                               text-white
+                               px-8
+                               py-4
+                               rounded-lg
+                               font-headline-sm
+                               text-headline-sm
+                               font-semibold
+                               hover:bg-primary
+                               transition-colors
+                               flex
+                               justify-center
+                               items-center
+                               gap-2"
+                    >
+
+                        View Latest Results
+
+                        <span class="material-symbols-outlined text-sm">
+                            arrow_forward
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        class="ai-gradient-bg
+                               px-8
+                               py-4
+                               rounded-lg
+                               font-headline-sm
+                               text-headline-sm
+                               font-semibold
+                               hover:opacity-90
+                               transition-opacity
+                               flex
+                               justify-center
+                               items-center
+                               gap-2
+                               border
+                               border-transparent
+                               shadow-md"
+                    >
+
+                        <span
+                            class="ai-sparkle-text
+                                   flex
+                                   items-center
+                                   gap-2"
+                        >
+
+                            <span
+                                class="material-symbols-outlined text-sm"
+                                style="font-variation-settings: 'FILL' 1;"
+                            >
+                                auto_awesome
+                            </span>
+
+                            Explore AI Predictions
+
+                        </span>
+
+                    </button>
+
+                </div>
+
+
+                <!-- Disclaimer -->
+
+                <p
+                    class="font-body-sm
+                           text-body-sm
+                           text-outline
+                           mt-6
+                           flex
+                           items-start
+                           gap-2
+                           max-w-md"
+                >
+
+                    <span
+                        class="material-symbols-outlined
+                               text-[16px]
+                               mt-0.5"
+                    >
+                        info
+                    </span>
+
+                    Lottery predictions are statistical estimates
+                    based on historical data and do not guarantee
+                    future results. Play responsibly.
+
+                </p>
+
+            </div>
+
+
+
+            <!-- =================================================
+                 DASHBOARD PREVIEW
+            ================================================== -->
+
+            <div
+                class="flex-1
+                       mt-12
+                       lg:mt-0
+                       relative"
+            >
+
+                <!-- Decorative background -->
+
+                <div
+                    class="absolute
+                           -inset-4
+                           bg-gradient-to-tr
+                           from-surface-container-low
+                           to-surface-container-highest
+                           rounded-[2rem]
+                           -z-10
+                           transform
+                           rotate-3"
+                ></div>
+
+
+                <div
+                    class="grid
+                           grid-cols-1
+                           md:grid-cols-2
+                           gap-4"
+                >
+
+
+                    <!-- =========================================
+                         LATEST DRAW
+                    ========================================== -->
+
+                    <div
+                        class="bg-surface-container-lowest
+                               rounded-xl
+                               p-6
+                               shadow-sm
+                               border
+                               border-surface-container
+                               md:col-span-2
+                               group
+                               hover:-translate-y-1
+                               transition-transform
+                               duration-300
+                               relative
+                               overflow-hidden"
+                    >
+
+                        <!-- Hover effect -->
+
+                        <div
+                            class="absolute
+                                   inset-0
+                                   bg-gradient-to-r
+                                   from-transparent
+                                   via-white
+                                   to-transparent
+                                   opacity-0
+                                   group-hover:opacity-20
+                                   transform
+                                   -translate-x-full
+                                   group-hover:translate-x-full
+                                   transition-all
+                                   duration-1000
+                                   ease-in-out"
+                        ></div>
+
+
+                        <div
+                            class="flex
+                                   justify-between
+                                   items-center
+                                   mb-6"
+                        >
+
+                            <div>
+
+                                <h3
+                                    class="font-label-caps
+                                           text-label-caps
+                                           text-on-surface
+                                           uppercase
+                                           tracking-widest
+                                           text-surface-tint"
+                                >
+                                    Latest Draw
+                                </h3>
+
+
+                                <p
+                                    class="font-headline-md
+                                           text-headline-md
+                                           text-primary
+                                           font-bold"
+                                >
+                                    Daily Lotto
+                                </p>
+
+                            </div>
+
+
+                            <span
+                                class="font-body-sm
+                                       text-body-sm
+                                       text-on-surface-variant
+                                       bg-surface-container
+                                       px-2
+                                       py-1
+                                       rounded"
+                            >
+                                Latest
+                            </span>
+
+                        </div>
+
+
+                        <!-- Lottery numbers -->
+
+                        <div
+                            class="flex
+                                   flex-wrap
+                                   gap-3
+                                   justify-center
+                                   md:justify-start"
+                        >
+
+                            <div
+                                id="one"
+                                class="lottery-ball"
+                            >
+                                12
+                            </div>
+
+                            <div
+                                id="two"
+                                class="lottery-ball"
+                            >
+                                24
+                            </div>
+
+                            <div
+                                id="three"
+                                class="lottery-ball"
+                            >
+                                37
+                            </div>
+
+                            <div
+                                id="four"
+                                class="lottery-ball"
+                            >
+                                41
+                            </div>
+
+                            <div
+                                id="five"
+                                class="lottery-ball"
+                            >
+                                56
+                            </div>
+
+                            <div
+                                id="six"
+                                class="lottery-ball"
+                            >
+                                --
+                            </div>
+
+                            <div
+                                id="l-max"
+                                class="lottery-ball lottery-ball-bonus"
+                            >
+                                08
+                            </div>
+
+                            <div
+                                id="l-super-max"
+                                class="lottery-ball lottery-ball-bonus"
+                            >
+                                08
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         HOT NUMBERS
+                    ========================================== -->
+
+                    <div
+                        class="bg-surface-container-lowest
+                               rounded-xl
+                               p-6
+                               shadow-sm
+                               border
+                               border-surface-container
+                               flex
+                               flex-col
+                               justify-between"
+                    >
+
+                        <div
+                            class="flex
+                                   justify-between
+                                   items-start
+                                   mb-4"
+                        >
+
+                            <h3
+                                class="font-label-caps
+                                       text-label-caps
+                                       text-on-surface
+                                       uppercase
+                                       tracking-widest
+                                       text-surface-tint"
+                            >
+                                Hot Numbers
+                            </h3>
+
+
+                            <span
+                                class="material-symbols-outlined
+                                       text-secondary"
+                            >
+                                trending_up
+                            </span>
+
+                        </div>
+
+
+                        <div
+                            class="flex
+                                   items-end
+                                   gap-2
+                                   h-16
+                                   w-full"
+                        >
+
+                            <div
+                                class="bg-secondary/20
+                                       w-1/6
+                                       h-[30%]
+                                       rounded-t-sm"
+                            ></div>
+
+                            <div
+                                class="bg-secondary/40
+                                       w-1/6
+                                       h-[50%]
+                                       rounded-t-sm"
+                            ></div>
+
+                            <div
+                                class="bg-secondary/60
+                                       w-1/6
+                                       h-[40%]
+                                       rounded-t-sm"
+                            ></div>
+
+                            <div
+                                class="bg-secondary
+                                       w-1/6
+                                       h-[90%]
+                                       rounded-t-sm
+                                       relative
+                                       group"
+                            >
+
+                                <div
+                                    class="absolute
+                                           -top-6
+                                           left-1/2
+                                           -translate-x-1/2
+                                           bg-inverse-surface
+                                           text-on-primary
+                                           font-data-mono
+                                           text-data-mono
+                                           text-xs
+                                           px-2
+                                           py-1
+                                           rounded
+                                           opacity-0
+                                           group-hover:opacity-100
+                                           transition-opacity"
+                                >
+                                    #24
+                                </div>
+
+                            </div>
+
+                            <div
+                                class="bg-secondary/30
+                                       w-1/6
+                                       h-[60%]
+                                       rounded-t-sm"
+                            ></div>
+
+                            <div
+                                class="bg-secondary/50
+                                       w-1/6
+                                       h-[75%]
+                                       rounded-t-sm"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- =========================================
+                         AI PREDICTION LOCKED CARD
+                    ========================================== -->
+
+                    <div
+                        class="rounded-xl
+                               p-6
+                               border
+                               border-[#e2e8f0]
+                               relative
+                               overflow-hidden
+                               flex
+                               flex-col
+                               justify-center
+                               items-center
+                               min-h-[160px]
+                               ai-gradient-bg"
+                    >
+
+                        <!-- Glass lock overlay -->
+
+                        <div
+                            class="absolute
+                                   inset-0
+                                   bg-white/20
+                                   backdrop-blur-md
+                                   z-10
+                                   flex
+                                   flex-col
+                                   justify-center
+                                   items-center
+                                   p-4
+                                   text-center"
+                        >
+
+                            <span
+                                class="material-symbols-outlined
+                                       text-white
+                                       text-3xl
+                                       mb-2
+                                       drop-shadow-md"
+                                style="font-variation-settings: 'FILL' 1;"
+                            >
+                                lock
+                            </span>
+
+
+                            <p
+                                class="font-headline-sm
+                                       text-headline-sm
+                                       text-white
+                                       font-semibold
+                                       drop-shadow-md"
+                            >
+                                Unlock AI Forecasts
+                            </p>
+
+
+                            <p
+                                class="font-body-sm
+                                       text-body-sm
+                                       text-white/90
+                                       mt-1"
+                            >
+                                Upgrade to view predictive models
+                            </p>
+
+                        </div>
+
+
+                        <!-- Blurred prediction underneath -->
+
+                        <div
+                            class="flex
+                                   gap-2
+                                   opacity-30
+                                   filter
+                                   blur-sm"
+                        >
+
+                            <div
+                                class="w-10
+                                       h-10
+                                       rounded-full
+                                       bg-white
+                                       flex
+                                       items-center
+                                       justify-center
+                                       font-data-mono
+                                       text-black"
+                            >
+                                ??
+                            </div>
+
+                            <div
+                                class="w-10
+                                       h-10
+                                       rounded-full
+                                       bg-white
+                                       flex
+                                       items-center
+                                       justify-center
+                                       font-data-mono
+                                       text-black"
+                            >
+                                ??
+                            </div>
+
+                            <div
+                                class="w-10
+                                       h-10
+                                       rounded-full
+                                       bg-white
+                                       flex
+                                       items-center
+                                       justify-center
+                                       font-data-mono
+                                       text-black"
+                            >
+                                ??
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer
+        class="bg-surface-container-highest
+               border-t
+               border-outline-variant
+               w-full
+               mt-auto"
+    >
+
+        <div
+            class="grid
+                   grid-cols-1
+                   md:grid-cols-2
+                   gap-base
+                   px-margin-mobile
+                   md:px-margin-desktop
+                   py-margin-desktop
+                   max-w-container-max
+                   mx-auto"
+        >
+
+            <div>
+
+                <span
+                    class="font-headline-sm
+                           text-headline-sm
+                           font-bold
+                           text-on-surface
+                           block
+                           mb-2"
+                >
+                    Lottery Insight
+                </span>
+
+
+                <p
+                    class="font-body-sm
+                           text-body-sm
+                           text-on-surface-variant"
+                >
+                    © 2024 Lottery Insight.
+                    Data-driven clarity for serious analysts.
+                </p>
+
+            </div>
+
+
+            <div
+                class="flex
+                       flex-wrap
+                       gap-4
+                       md:justify-end"
+            >
+
+                <a
+                    href="#"
+                    class="font-body-sm
+                           text-body-sm
+                           text-on-surface-variant
+                           hover:text-primary
+                           underline
+                           transition-colors"
+                >
+                    About
+                </a>
+
+                <a
+                    href="#"
+                    class="font-body-sm
+                           text-body-sm
+                           text-on-surface-variant
+                           hover:text-primary
+                           underline
+                           transition-colors"
+                >
+                    Contact
+                </a>
+
+                <a
+                    href="#"
+                    class="font-body-sm
+                           text-body-sm
+                           text-on-surface-variant
+                           hover:text-primary
+                           underline
+                           transition-colors"
+                >
+                    FAQ
+                </a>
+
+                <a
+                    href="#"
+                    class="font-body-sm
+                           text-body-sm
+                           text-on-surface-variant
+                           hover:text-primary
+                           underline
+                           transition-colors"
+                >
+                    TOS
+                </a>
+
+                <a
+                    href="#"
+                    class="font-body-sm
+                           text-body-sm
+                           text-on-surface-variant
+                           hover:text-primary
+                           underline
+                           transition-colors"
+                >
+                    Privacy
+                </a>
+
+                <a
+                    href="#"
+                    class="font-body-sm
+                           text-body-sm
+                           text-on-surface-variant
+                           hover:text-primary
+                           underline
+                           transition-colors"
+                >
+                    Responsible Gambling
+                </a>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+    <section id="prediction" style="font-size: 1.2rem;"></section>
+    <section id="topFive" style="font-size: 1.4rem;"></section>
+
+
+    <!-- =========================================================
+         APPLICATION JS
+         
+         Loaded LAST so the DOM already exists.
+    ========================================================== -->
+
+    <script src="app.js"></script>
+    <script src="index.js"></script>
+
+</body>
+
 </html>
